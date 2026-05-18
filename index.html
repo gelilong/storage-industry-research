@@ -1,1066 +1,565 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>全球计算机存储行业深度研究报告 | 2026.05</title>
+<title>Global Computer Storage Market | 2025–2030 Forecast</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
   :root {
-    --bg: #0a0e14;
-    --surface: #131820;
-    --surface2: #1a1f2e;
-    --border: #252a38;
-    --text: #cdd6e0;
-    --text-dim: #7a8294;
-    --text-bright: #e6edf5;
-    --accent: #3b82f6;
-    --accent2: #8b5cf6;
-    --accent3: #06b6d4;
-    --green: #22c55e;
-    --red: #ef4444;
-    --amber: #f59e0b;
-    --rose: #f43f5e;
-    --header-bg: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
-    --card-bg: linear-gradient(145deg, #131820, #1a1f2e);
-    --highlight: #1e3a5f;
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --border: #2a2d3a;
+    --text: #e2e4e9;
+    --text-secondary: #8b8fa3;
+    --accent: #6366f1;
+    --accent2: #22d3ee;
+    --green: #34d399;
+    --orange: #f59e0b;
+    --red: #f87171;
+    --blue: #60a5fa;
+    --purple: #a78bfa;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; scroll-padding-top: 70px; }
-
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: var(--bg);
     color: var(--text);
-    line-height: 1.75;
-    font-size: 15px;
+    line-height: 1.6;
   }
-
-  /* ---- HERO ---- */
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+  
+  /* Hero */
   .hero {
-    background: var(--header-bg);
-    padding: 80px 24px 60px;
+    background: linear-gradient(135deg, #1a1d27 0%, #1e1b4b 50%, #0f1117 100%);
+    padding: 80px 0 60px;
     text-align: center;
-    position: relative;
-    overflow: hidden;
     border-bottom: 1px solid var(--border);
   }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    background: radial-gradient(circle at 30% 40%, rgba(59,130,246,0.08) 0%, transparent 60%),
-                radial-gradient(circle at 70% 60%, rgba(139,92,246,0.06) 0%, transparent 60%);
-    animation: heroPulse 8s ease-in-out infinite;
-  }
-  @keyframes heroPulse {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; }
-  }
-  .hero-content { position: relative; z-index: 1; }
   .hero h1 {
-    font-size: clamp(28px, 4.5vw, 46px);
+    font-size: 2.8rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #e6edf5 0%, #93c5fd 40%, #a78bfa 100%);
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    letter-spacing: -0.5px;
     margin-bottom: 16px;
   }
   .hero .subtitle {
-    font-size: 16px;
-    color: var(--text-dim);
-    margin-bottom: 24px;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto 32px;
   }
-  .hero .badge-row {
+  .hero .metrics {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 48px;
     flex-wrap: wrap;
   }
-  .badge {
-    display: inline-block;
-    padding: 5px 14px;
-    border-radius: 50px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-    border: 1px solid var(--border);
-    background: var(--surface2);
-    color: var(--text-dim);
-  }
-  .badge.accent { border-color: rgba(59,130,246,0.3); color: var(--accent); background: rgba(59,130,246,0.08); }
-
-  /* ---- NAV ---- */
-  .nav-bar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(10,14,20,0.88);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border-bottom: 1px solid var(--border);
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-  .nav-bar::-webkit-scrollbar { height: 0; }
-  .nav-inner {
-    display: flex;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-  .nav-inner a {
-    display: inline-block;
-    padding: 14px 16px;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-dim);
-    text-decoration: none;
-    border-bottom: 2px solid transparent;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
-  .nav-inner a:hover { color: var(--text-bright); border-bottom-color: var(--accent); }
-
-  /* ---- CONTAINER ---- */
-  .container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 40px 24px 80px;
-  }
-
-  /* ---- SECTION ---- */
-  .section {
-    margin-bottom: 56px;
-  }
-  .section h2 {
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--text-bright);
-    margin-bottom: 8px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid var(--border);
-    position: relative;
-  }
-  .section h2::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 60px;
-    height: 2px;
-    background: var(--accent);
-  }
-  .section h3 {
-    font-size: 19px;
-    font-weight: 600;
-    color: var(--text-bright);
-    margin: 28px 0 12px;
-    padding-left: 12px;
-    border-left: 3px solid var(--accent2);
-  }
-  .section h4 {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--accent3);
-    margin: 20px 0 8px;
-  }
-
-  /* ---- METRIC CARDS ---- */
-  .metric-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    gap: 16px;
-    margin: 24px 0;
-  }
   .metric-card {
-    background: var(--card-bg);
+    background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 24px;
-    transition: transform 0.2s, border-color 0.2s;
+    border-radius: 16px;
+    padding: 24px 32px;
+    min-width: 200px;
   }
-  .metric-card:hover {
-    transform: translateY(-2px);
-    border-color: rgba(59,130,246,0.3);
-  }
-  .metric-card .label {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    margin-bottom: 6px;
-  }
-  .metric-card .value {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--text-bright);
-    font-variant-numeric: tabular-nums;
-  }
-  .metric-card .change {
-    font-size: 13px;
-    margin-top: 4px;
-  }
-  .metric-card .change.up { color: var(--green); }
-  .metric-card .change.down { color: var(--red); }
+  .metric-card .label { font-size: 0.85rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
+  .metric-card .value { font-size: 2rem; font-weight: 700; color: var(--accent2); margin: 4px 0; }
+  .metric-card .change { font-size: 0.9rem; color: var(--green); }
 
-  /* ---- TABLES ---- */
-  .table-wrap {
-    overflow-x: auto;
-    margin: 20px 0;
+  /* Sections */
+  section { padding: 60px 0; }
+  section h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  section .section-desc {
+    color: var(--text-secondary);
+    margin-bottom: 32px;
+    font-size: 0.95rem;
+  }
+  
+  /* Chart Cards */
+  .chart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(580px, 1fr));
+    gap: 24px;
+  }
+  .chart-card {
+    background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    background: var(--surface);
+    border-radius: 16px;
+    padding: 24px;
   }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13.5px;
-    min-width: 600px;
-  }
-  thead {
-    background: var(--surface2);
-    position: sticky;
-    top: 53px;
-    z-index: 10;
-  }
-  th {
-    padding: 12px 14px;
-    text-align: left;
+  .chart-card.full { grid-column: 1 / -1; }
+  .chart-card h3 {
+    font-size: 1.1rem;
     font-weight: 600;
-    color: var(--text-dim);
-    font-size: 11.5px;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+  .chart-card canvas { width: 100% !important; max-height: 400px; }
+  
+  /* Data Table */
+  .data-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  .data-table th, .data-table td {
+    padding: 12px 16px;
+    text-align: right;
+    border-bottom: 1px solid var(--border);
+  }
+  .data-table th {
+    background: rgba(99,102,241,0.1);
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    border-bottom: 1px solid var(--border);
-    white-space: nowrap;
   }
-  td {
-    padding: 11px 14px;
-    border-bottom: 1px solid rgba(37,42,56,0.4);
-    vertical-align: top;
+  .data-table th:first-child, .data-table td:first-child { text-align: left; }
+  .data-table td { font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+  .data-table tr:hover { background: rgba(255,255,255,0.03); }
+  .up { color: var(--green); }
+  .down { color: var(--red); }
+  
+  /* Insights */
+  .insights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
   }
-  tr:last-child td { border-bottom: none; }
-  tbody tr:hover { background: rgba(59,130,246,0.03); }
-
-  .highlight-row {
-    background: rgba(59,130,246,0.06) !important;
+  .insight-card {
+    background: var(--card);
+    border: 1px solid var(--border);
     border-left: 3px solid var(--accent);
+    border-radius: 0 12px 12px 0;
+    padding: 20px;
   }
-
-  .rank-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px; height: 24px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 700;
-  }
-  .rank-1 { background: linear-gradient(135deg, #f59e0b, #d97706); color: #000; }
-  .rank-2 { background: linear-gradient(135deg, #94a3b8, #64748b); color: #fff; }
-  .rank-3 { background: linear-gradient(135deg, #cd7f32, #a0522d); color: #fff; }
-  .rank-other { background: var(--surface2); color: var(--text-dim); border: 1px solid var(--border); }
-
-  /* ---- CALLOUT ---- */
-  .callout {
-    background: var(--highlight);
-    border-left: 4px solid var(--accent);
-    border-radius: 0 8px 8px 0;
-    padding: 16px 20px;
-    margin: 20px 0;
-    font-size: 14px;
-    color: var(--text);
-  }
-  .callout.warn {
-    background: rgba(239,68,68,0.08);
-    border-left-color: var(--red);
-  }
-  .callout.amber {
-    background: rgba(245,158,11,0.08);
-    border-left-color: var(--amber);
-  }
-  .callout strong { color: var(--text-bright); }
-
-  /* ---- LISTS ---- */
-  ul, ol { padding-left: 24px; margin: 12px 0; }
-  li { margin-bottom: 6px; }
-  ul.styled { list-style: none; padding-left: 0; }
-  ul.styled li {
-    padding: 8px 0 8px 28px;
-    position: relative;
-    border-bottom: 1px solid rgba(37,42,56,0.3);
-  }
-  ul.styled li::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 14px;
-    width: 8px; height: 8px;
-    background: var(--accent);
-    border-radius: 2px;
-    transform: rotate(45deg);
-  }
-
-  /* ---- FOOTER ---- */
-  .disclaimer {
-    margin-top: 60px;
-    padding: 24px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    font-size: 13px;
-    color: var(--text-dim);
-    line-height: 1.6;
-  }
-  .disclaimer strong { color: var(--red); }
-
-  .footer {
-    text-align: center;
-    padding: 40px 24px;
-    color: var(--text-dim);
-    font-size: 12px;
+  .insight-card h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 8px; }
+  .insight-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
+  .insight-card.accent2 { border-left-color: var(--accent2); }
+  .insight-card.green { border-left-color: var(--green); }
+  .insight-card.orange { border-left-color: var(--orange); }
+  .insight-card.purple { border-left-color: var(--purple); }
+  .insight-card.blue { border-left-color: var(--blue); }
+  
+  /* Footer */
+  footer {
     border-top: 1px solid var(--border);
-    margin-top: 40px;
+    padding: 32px 0;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
   }
-
-  /* ---- RESPONSIVE ---- */
-  @media (max-width: 768px) {
-    .container { padding: 24px 16px 60px; }
-    .hero { padding: 56px 16px 40px; }
-    .hero h1 { font-size: 24px; }
-    .metric-card .value { font-size: 22px; }
-    table { font-size: 12px; }
-    th, td { padding: 8px 10px; }
-  }
-
-  /* ---- PRINT ---- */
-  @media print {
-    :root { --bg: #fff; --surface: #fff; --surface2: #f5f5f5; --text: #222; --text-dim: #555; --text-bright: #000; --border: #ddd; }
-    .nav-bar { display: none; }
-    .hero { background: #f8f8f8; padding: 30px 24px; }
-    .container { padding: 0; }
-    .section { page-break-inside: avoid; }
-  }
-
-  /* ---- BACK TO TOP ---- */
-  .back-top {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s;
-    z-index: 99;
-    box-shadow: 0 4px 14px rgba(59,130,246,0.4);
-  }
-  .back-top.visible { opacity: 1; transform: translateY(0); }
-
-  /* ---- Collapsible TOC ---- */
-  .toc-toggle {
-    display: none;
-    width: 100%;
-    padding: 12px 20px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    font-size: 14px;
-    cursor: pointer;
-    margin-bottom: 24px;
-    text-align: left;
-  }
-  .toc-toggle::after { content: ' ▾'; float: right; }
-  @media (max-width: 768px) {
-    .toc-toggle { display: block; }
-    .nav-inner { display: none; }
-    .nav-inner.open { display: flex; flex-direction: column; }
-    .nav-inner.open a { display: block; border-bottom: none; border-left: 2px solid transparent; padding: 10px 20px; }
+  footer a { color: var(--accent); text-decoration: none; }
+  
+  /* Responsive */
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 1.8rem; }
+    .hero .metrics { gap: 16px; }
+    .metric-card { min-width: 140px; padding: 16px 20px; }
+    .metric-card .value { font-size: 1.5rem; }
+    .chart-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
-<!-- ====== HERO ====== -->
+<!-- Hero -->
 <header class="hero">
-  <div class="hero-content">
-    <h1>全球计算机存储行业深度研究报告</h1>
-    <p class="subtitle">2026 年 5 月 18 日 · 行业 Primer + 竞争格局 + 可比估值 + 投资思路</p>
-    <div class="badge-row">
-      <span class="badge accent">DRAM</span>
-      <span class="badge accent">NAND Flash</span>
-      <span class="badge accent">HBM</span>
-      <span class="badge">HDD</span>
-      <span class="badge">企业存储</span>
-      <span class="badge">SSD 控制器</span>
+  <div class="container">
+    <h1>Global Computer Storage Market</h1>
+    <p class="subtitle">Five-year outlook (2025–2030): sizing, segmentation, and growth trajectories across HDD, SSD, DRAM, Cloud Storage, and Enterprise Storage</p>
+    <div class="metrics">
+      <div class="metric-card">
+        <div class="label">Market Size 2025</div>
+        <div class="value">$255.3B</div>
+        <div class="change">Total Addressable Market</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Market Size 2030E</div>
+        <div class="value">$483.9B</div>
+        <div class="change">Projected</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">CAGR 2025–2030</div>
+        <div class="value">14.1%</div>
+        <div class="change">~1.9× Growth</div>
+      </div>
     </div>
   </div>
 </header>
 
-<!-- ====== STICKY NAV ====== -->
-<nav class="nav-bar">
-  <div class="nav-inner" id="navInner">
-    <a href="#summary">1. 执行摘要</a>
-    <a href="#overview">2. 行业概览</a>
-    <a href="#tech">3. 技术图谱</a>
-    <a href="#competitive">4. 竞争格局</a>
-    <a href="#policy">5. 政策与地缘</a>
-    <a href="#applications">6. 需求驱动</a>
-    <a href="#comps">7. 估值表</a>
-    <a href="#ideas">8. 投资思路</a>
-    <a href="#outlook">9. 展望与风险</a>
-  </div>
-</nav>
-
-<main class="container">
-
-<!-- ====== 1. 执行摘要 ====== -->
-<section class="section" id="summary">
-  <h2>1. 执行摘要</h2>
-  <p>全球存储行业正经历一场由 <strong style="color:var(--accent)">AI/大模型训练推理驱动的超级周期</strong>。2025 年全球存储器市场收入接近 <strong>$2,000 亿美元</strong>（Yole Group），HBM（高带宽内存）子赛道展现出远超传统存储的结构性增长——2025 年市场规模 ~$72.7 亿，预计 2032 年逼近 <strong>$700 亿</strong>，CAGR 超 38%。</p>
-
-  <div class="metric-grid">
-    <div class="metric-card">
-      <div class="label">全球存储器 2025 收入</div>
-      <div class="value">~$2,000亿</div>
-      <div class="change up">+18% YoY</div>
-    </div>
-    <div class="metric-card">
-      <div class="label">HBM 市场规模 2025</div>
-      <div class="value">$72.7亿</div>
-      <div class="change up">+91% YoY</div>
-    </div>
-    <div class="metric-card">
-      <div class="label">HBM 2032E 规模</div>
-      <div class="value">~$700亿</div>
-      <div class="change up">CAGR 38%+</div>
-    </div>
-    <div class="metric-card">
-      <div class="label">YMTC NAND 全球份额</div>
-      <div class="value">~8%</div>
-      <div class="change up">三期 2026H2 量产</div>
-    </div>
-    <div class="metric-card">
-      <div class="label">CXMT DRAM 全球份额</div>
-      <div class="value">4.7%</div>
-      <div class="change up">DDR5 量产出货</div>
+<!-- Chart 1: Total Market -->
+<section>
+  <div class="container">
+    <h2>1. Total Market Size & Growth Trajectory</h2>
+    <p class="section-desc">The global data storage market is projected to nearly double from $255B to $484B over five years, fueled by AI workloads, cloud migration, and exponential data generation. Sources: Mordor Intelligence, Fortune Business Insights (2025).</p>
+    <div class="chart-grid">
+      <div class="chart-card full">
+        <h3>Global Data Storage Market — Total Revenue ($B), 2025–2030</h3>
+        <canvas id="totalMarketChart"></canvas>
+      </div>
     </div>
   </div>
-
-  <p>与此同时，<strong style="color:var(--accent2)">中国存储产业链</strong>在政策与资本双重推动下进入史无前例的追赶阶段：长江存储（YMTC）月产能突破 13 万片，三期项目提前至 2026 年下半年量产；长鑫存储（CXMT）DDR5 量产出货、DRAM 全球份额攀升至 4.7%。</p>
-
-  <div class="callout">
-    <strong>核心发现：</strong><br>
-    &bull; DRAM 三寡头格局短期稳固（三星 36.6% / SK 海力士 32.9% / 美光 22.9%），但 CXMT 正在边缘突破<br>
-    &bull; HBM 成为兵家必争之地，SK 海力士占据 50-60% 供货份额<br>
-    &bull; NAND 前五合计 ~95% 份额，YMTC 三期目标全球 15%<br>
-    &bull; 中国企业存储增速领先全球（华为 +9.5% vs. 行业 +2.1%）<br>
-    &bull; 国家大基金三期 ($470 亿) 重点投向设备与存储
-  </div>
 </section>
 
-<!-- ====== 2. 行业概览 ====== -->
-<section class="section" id="overview">
-  <h2>2. 行业概览：规模与结构</h2>
-
-  <h3>2.1 全球存储器市场规模</h3>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th>细分市场</th><th>2024 年收入</th><th>2025 年收入</th><th>同比增速</th><th>数据来源</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>DRAM（含 HBM）</strong></td><td>~$970 亿</td><td>~$1,200 亿+</td><td style="color:var(--green)">~+25%</td><td>Yole Group</td></tr>
-        <tr><td><strong>NAND Flash</strong></td><td>~$680 亿</td><td>~$800 亿+</td><td style="color:var(--green)">~+18%</td><td>Yole Group</td></tr>
-        <tr class="highlight-row"><td><strong>存储器合计</strong></td><td>~$1,700 亿</td><td><strong>~$2,000 亿</strong></td><td style="color:var(--green)">~+18%</td><td>Yole Group</td></tr>
-        <tr><td><strong>HBM（子集）</strong></td><td>~$38 亿</td><td>~$72.7 亿</td><td style="color:var(--green)">~+91%</td><td>Precedence Research</td></tr>
-        <tr><td><strong>HDD 硬盘</strong></td><td>~$256 亿</td><td>~$583 亿</td><td>—</td><td>多方口径</td></tr>
-        <tr><td><strong>企业存储系统 (ESS)</strong></td><td>~$780 亿</td><td>~$800 亿</td><td style="color:var(--green)">~+2.1%</td><td>IDC Q3 2025</td></tr>
-        <tr><td><strong>SSD 控制器</strong></td><td>~$321 亿</td><td>~$363.7 亿</td><td style="color:var(--green)">~+13%</td><td>GM Insights</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p style="font-size:13px;color:var(--text-dim);">注：不同研究机构口径不一。Yole Group 的 ~$2,000 亿（2025）是当前较广泛引用的口径。</p>
-
-  <h3>2.2 价值链结构</h3>
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;margin:20px 0;font-family:monospace;font-size:13px;line-height:2;overflow-x:auto;white-space:pre;">┌──────────────────────────────────────────────────────┐
-│              <span style="color:var(--accent)">上游：原材料与设备</span>                              │
-│  硅晶圆（SUMCO／环球晶圆）│ 光刻机（ASML）             │
-│  光刻胶（JSR／彤程新材）│ 靶材 │ CMP 耗材            │
-├──────────────────────────────────────────────────────┤
-│              <span style="color:var(--accent2)">中游：芯片设计与制造</span>                            │
-│  DRAM（三星/SK/美光/CXMT）│ NAND（三星/SK/铠侠/YMTC） │
-│  控制器（群联/慧荣/Marvell）│ 接口芯片（澜起/Rambus）    │
-├──────────────────────────────────────────────────────┤
-│              <span style="color:var(--accent3)">中游：模组与封装</span>                                │
-│  SSD 模组（金士顿/江波龙）│ 内存模组 DIMM              │
-│  HBM 先进封装（CoWoS／TCB）                           │
-├──────────────────────────────────────────────────────┤
-│              <span style="color:var(--green)">下游：系统与应用</span>                                │
-│  服务器／数据中心 │ PC/笔记本 │ 智能手机 │ 汽车/工业    │
-│  AI 训练推理（NVIDIA/AMD）│ 消费电子 │ 自动驾驶          │
-└──────────────────────────────────────────────────────┘</div>
-
-  <h3>2.3 "为什么是现在"——超级周期的驱动力</h3>
-  <ol>
-    <li><strong>AI 算力军备竞赛</strong>：单台 NVIDIA Rubin 搭载 >288GB HBM4，2.5-2.7M 出货量对应海量存储需求。HBM 已挤压 DDR5 产能。</li>
-    <li><strong>数据中心扩容</strong>：全球 hyperscaler Capex 2025-2026 持续增长，全闪存存储 +17.6% YoY。</li>
-    <li><strong>端侧 AI 崛起</strong>：AI PC/AI 手机推动 DRAM/NAND 容量升级（手机 8→12-16GB，PC SSD 512GB→1TB+）。</li>
-    <li><strong>周期底部反弹</strong>：经历 2022-2023 深度下行后，2025H2-2026 进入供不应求的 "超级周期"。</li>
-    <li><strong>地缘政治驱动国产替代</strong>：美国对华出口管制持续升级，中国存储自给率提升成为国家战略优先级。</li>
-  </ol>
-</section>
-
-<!-- ====== 3. 技术图谱 ====== -->
-<section class="section" id="tech">
-  <h2>3. 技术图谱：五大细分赛道</h2>
-
-  <h3>3.1 DRAM（含 HBM）</h3>
-  <ul>
-    <li><strong>标准 DRAM：</strong>DDR4（成熟）、DDR5（主流）、LPDDR5/5X（移动端）</li>
-    <li><strong>高性能 DRAM：</strong>HBM3E（当前主力）、HBM4（2026 量产）、GDDR7（图形）</li>
-    <li><strong>利基 DRAM：</strong>DDR3、LPDDR4（IoT/汽车/工业）</li>
-  </ul>
-  <h4>关键趋势</h4>
-  <ul>
-    <li>DDR5 渗透率 2025 年突破 50%，2026E 达到 70%+</li>
-    <li>HBM 占 DRAM 总产能比例持续上升，2026E 消耗 ~25-30% DRAM 晶圆</li>
-    <li>HBM4 采用 12-Hi/16-Hi 堆叠，单颗容量 >36GB，较 HBM3E 翻倍</li>
-    <li>制程演进：1β (12nm) → 1γ (11nm) → 1δ (sub-10nm)</li>
-  </ul>
-
-  <h3>3.2 NAND Flash</h3>
-  <ul>
-    <li><strong>3D NAND：</strong>128 层（成熟）、176/232 层（主流）、321 层（SK 海力士量产）、400+ 层（研发中）</li>
-    <li><strong>QLC/PLC：</strong>单位容量成本持续下降，数据中心读取密集型场景快速渗透</li>
-  </ul>
-  <h4>关键趋势</h4>
-  <ul>
-    <li>层数竞赛白热化：SK 海力士 321 层已于 2025 年量产</li>
-    <li>YMTC Xtacking 3.0/4.0 在堆叠效率上具备差异化优势</li>
-    <li>企业级 SSD 需求主导增长（AI 训练数据湖、推理缓存）</li>
-  </ul>
-
-  <h3>3.3 HDD（机械硬盘）</h3>
-  <p><strong>三大玩家：</strong>Seagate / Western Digital / Toshiba<br>
-  <strong>技术路线：</strong>HAMR（热辅助磁记录，Seagate 领先）、MAMR（微波辅助，WD）<br>
-  <strong>容量演进：</strong>20-24TB → 30TB+ HAMR 量产 → 50TB 路线图</p>
-  <p>尽管 SSD 持续替代，但大容量冷数据/归档存储仍依赖 HDD 的 $/TB 成本优势。AI 训练产生的海量数据反而支撑了 HDD 的长期需求。</p>
-
-  <h3>3.4 企业存储系统</h3>
-  <div class="metric-grid">
-    <div class="metric-card">
-      <div class="label">全闪存阵列 (AFA)</div>
-      <div class="value" style="color:var(--green)">+17.6%</div>
-      <div class="change up">增长引擎</div>
-    </div>
-    <div class="metric-card">
-      <div class="label">混合阵列</div>
-      <div class="value" style="color:var(--red)">-9.8%</div>
-      <div class="change down">持续萎缩</div>
-    </div>
-    <div class="metric-card">
-      <div class="label">磁盘阵列</div>
-      <div class="value" style="color:var(--red)">-6.3%</div>
-      <div class="change down">加速衰退</div>
-    </div>
-    <div class="metric-card">
-      <div class="label">软件定义存储 (SDS)</div>
-      <div class="value" style="color:var(--accent3)">HCI 渗透↑</div>
-      <div class="change up">超融合趋势</div>
+<!-- Chart 2: Growth Rate by Segment -->
+<section>
+  <div class="container">
+    <h2>2. Segment Growth Rates (CAGR Comparison)</h2>
+    <p class="section-desc">Cloud Storage leads all segments with ~18% CAGR, followed by SSD at ~15%. Legacy HDD grows the slowest at ~4.4% as SSD cannibalization accelerates.</p>
+    <div class="chart-grid">
+      <div class="chart-card full">
+        <h3>CAGR by Segment (2025–2030)</h3>
+        <canvas id="cagrChart"></canvas>
+      </div>
     </div>
   </div>
-  <p><strong>关键玩家：</strong>Dell (#1, 22.7%) / Huawei (#2, 12.0%) / NetApp (#3) / Pure Storage (#4) / HPE / IBM / Inspur</p>
-
-  <h3>3.5 SSD 控制器</h3>
-  <ul>
-    <li><strong>消费级：</strong>Phison（群联）/ Silicon Motion（慧荣）双寡头</li>
-    <li><strong>企业级：</strong>Marvell 领先，Microchip/Phison 追赶</li>
-    <li><strong>中国自主：</strong>联芸科技（Maxio）/ 华澜微（SageMicro）/ 得一微</li>
-  </ul>
 </section>
 
-<!-- ====== 4. 竞争格局 ====== -->
-<section class="section" id="competitive">
-  <h2>4. 竞争格局：全球 vs. 中国</h2>
-
-  <h3>4.1 DRAM 市场（Q4 2025）</h3>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th style="width:36px">#</th><th>公司</th><th>收入</th><th>QoQ</th><th>份额</th><th>核心优势</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><span class="rank-badge rank-1">1</span></td>
-          <td><strong>三星电子</strong></td><td>$191 亿</td>
-          <td style="color:var(--green)">+40.6%</td>
-          <td><strong>36.6%</strong></td>
-          <td>HBM3E + DDR5 量价齐升，1γ 制程导入</td>
-        </tr>
-        <tr>
-          <td><span class="rank-badge rank-2">2</span></td>
-          <td><strong>SK 海力士</strong></td><td>$172 亿</td>
-          <td style="color:var(--green)">+25.2%</td>
-          <td><strong>32.9%</strong></td>
-          <td>HBM 绝对领先（50-60% 供货），台积电深度绑定</td>
-        </tr>
-        <tr>
-          <td><span class="rank-badge rank-3">3</span></td>
-          <td><strong>美光</strong></td><td>$120 亿</td><td>—</td>
-          <td><strong>22.9%</strong></td>
-          <td>1β 制程领先，HBM3E 直接切入，份额下滑中</td>
-        </tr>
-        <tr class="highlight-row">
-          <td><span class="rank-badge rank-other">4</span></td>
-          <td><strong>CXMT（长鑫）</strong></td><td>—</td><td>—</td>
-          <td><strong>4.7%</strong></td>
-          <td>DDR5 量产突破，8000MT/s 产品发布</td>
-        </tr>
-        <tr>
-          <td><span class="rank-badge rank-other">5</span></td>
-          <td>其他</td><td>—</td><td>—</td><td>~3%</td>
-          <td>南亚科/华邦等，利基 DRAM</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <p style="font-size:12px;color:var(--text-dim);">来源：Omdia（via Gizmochina 2026.02）；Q4 2025 全球 DRAM 市场 $524.7 亿</p>
-
-  <div class="callout">
-    <strong>关键博弈动态：</strong><br>
-    &bull; SK 海力士凭 HBM3E 良率 + 台积电 CoWoS 绑定，2025 Q1 曾以 36.7% 份额首次超越三星<br>
-    &bull; 美光份额从 Q3 25.8% → Q4 22.9%，前三中唯一下滑<br>
-    &bull; CXMT 受制裁无法获取 EUV，但 19nm/17nm DUV 路线 DDR5 已量产
-  </div>
-
-  <h3>4.2 NAND Flash 市场（Q2 2025）</h3>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th style="width:36px">#</th><th>公司</th><th>收入</th><th>QoQ</th><th>份额</th><th>核心优势</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><span class="rank-badge rank-1">1</span></td>
-          <td><strong>三星</strong></td><td>$52 亿</td>
-          <td style="color:var(--green)">+23.8%</td>
-          <td><strong>32.9%</strong></td>
-          <td>企业级 SSD 强劲，产品组合优化</td>
-        </tr>
-        <tr>
-          <td><span class="rank-badge rank-2">2</span></td>
-          <td><strong>SK 集团</strong></td><td>$33.4 亿</td>
-          <td style="color:var(--green)">+52.5%</td>
-          <td><strong>21.1%</strong></td>
-          <td>Solidigm 企业 SSD + 321 层 NAND 量产</td>
-        </tr>
-        <tr>
-          <td><span class="rank-badge rank-3">3</span></td>
-          <td><strong>铠侠</strong></td><td>$21.4 亿</td>
-          <td style="color:var(--green)">+11.4%</td>
-          <td>~14.6%</td>
-          <td>AI 服务器需求 + 客户库存正常化</td>
-        </tr>
-        <tr>
-          <td><span class="rank-badge rank-other">4</span></td>
-          <td><strong>美光</strong></td><td>$21 亿</td>
-          <td style="color:var(--green)">+3.7%</td>
-          <td><strong>13.3%</strong></td>
-          <td>客户/数据中心 SSD 份额创新高</td>
-        </tr>
-        <tr>
-          <td><span class="rank-badge rank-other">5</span></td>
-          <td><strong>闪迪 (WDC)</strong></td><td>$19 亿</td>
-          <td style="color:var(--green)">+12.2%</td>
-          <td>~12.9%</td>
-          <td>渠道价格恢复 + 零售补库</td>
-        </tr>
-        <tr class="highlight-row">
-          <td><span class="rank-badge rank-other">—</span></td>
-          <td><strong>YMTC（长江）</strong></td><td>未披露</td><td>—</td>
-          <td><strong>~8%</strong></td>
-          <td>Xtacking 架构差异化，三期扩产中</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <p style="font-size:12px;color:var(--text-dim);">来源：TrendForce（2025.08）；Top 5 合计收入 $146.7 亿，环比 +22%</p>
-
-  <h3>4.3 HBM 市场（2026E 供货格局）</h3>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th>供应商</th><th>2026E 出货</th><th>供货份额</th><th>定位</th></tr>
-      </thead>
-      <tbody>
-        <tr class="highlight-row">
-          <td><strong>SK 海力士</strong></td><td>18-19 BGb</td>
-          <td><strong>50-60%</strong></td>
-          <td>HBM 绝对王者，良率 + 台积电 CoWoS 绑定</td>
-        </tr>
-        <tr>
-          <td><strong>三星</strong></td><td>15-16 BGb</td>
-          <td>25-35%</td>
-          <td>急起直追，DRAM 产能 + 一体化封装优势</td>
-        </tr>
-        <tr>
-          <td><strong>美光</strong></td><td>6-6.5 BGb</td>
-          <td>10-20%</td>
-          <td>后发制人，跳过 HBM3 直攻 HBM3E</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <p style="font-size:12px;color:var(--text-dim);">来源：Isaiah Research（2026.04）；2026E 总 HBM 出货 >34 BGb</p>
-
-  <div class="callout amber">
-    <strong>HBM 供给约束：</strong><br>
-    &bull; HBM 晶圆消耗量为同容量 DDR5 的 2-3 倍，良率 ~60-70%<br>
-    &bull; Nvidia 消耗全球 ~70% HBM 供给<br>
-    &bull; 长期供货协议（LTA）锁定产能，供给紧张预计持续至 2026 年底
-  </div>
-
-  <h3>4.4 企业存储系统（Q3 2025）</h3>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th style="width:36px">#</th><th>公司</th><th>份额</th><th>YoY</th><th>定位</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><span class="rank-badge rank-1">1</span></td>
-          <td><strong>Dell</strong></td><td>22.7%</td>
-          <td style="color:var(--red)">-49.0%</td>
-          <td>传统霸主，OEM 渠道流失严重</td>
-        </tr>
-        <tr class="highlight-row">
-          <td><span class="rank-badge rank-2">2</span></td>
-          <td><strong>华为</strong></td><td>12.0%</td>
-          <td style="color:var(--green)">+9.5%</td>
-          <td>OceanStor 全闪存，中国/EMEA 强劲</td>
-        </tr>
-        <tr>
-          <td><span class="rank-badge rank-3">3</span></td>
-          <td><strong>NetApp</strong></td><td>~9.4%</td>
-          <td style="color:var(--green)">+2.8%</td>
-          <td>混合云数据管理</td>
-        </tr>
-        <tr>
-          <td><span class="rank-badge rank-other">4</span></td>
-          <td><strong>Pure Storage</strong></td><td>—</td>
-          <td style="color:var(--green)">最快增速</td>
-          <td>全闪存原生架构，AI 场景受益</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <p style="font-size:12px;color:var(--text-dim);">来源：IDC Q3 2025 OEM Enterprise Storage Systems Tracker</p>
-
-  <h3>4.5 中国存储产业链全景</h3>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th>环节</th><th>公司</th><th>代码</th><th>核心产品</th><th>2025 进展</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>DRAM</strong></td><td>长鑫存储 (CXMT)</td><td>未上市</td><td>DDR4/DDR5/LPDDR5</td><td>DDR5 8000MT/s 量产，份额 4.7%</td></tr>
-        <tr><td><strong>NAND</strong></td><td>长江存储 (YMTC)</td><td>未上市</td><td>3D NAND (Xtacking)</td><td>月产能 13 万片，三期 2026H2 量产</td></tr>
-        <tr><td><strong>NOR Flash</strong></td><td>兆易创新</td><td>603986.SH</td><td>NOR + 利基 DRAM</td><td>收入 92 亿，净利 16.5 亿</td></tr>
-        <tr><td><strong>内存接口</strong></td><td>澜起科技</td><td>688008.SH</td><td>DDR5 RCD/DB/MXC</td><td>收入 54.6 亿，净利 22.4 亿，GPM 62%</td></tr>
-        <tr><td><strong>车规存储</strong></td><td>北京君正</td><td>300223.SZ</td><td>SRAM/DRAM (ISSI)</td><td>收入 47.4 亿，净利 3.75 亿</td></tr>
-        <tr><td><strong>存储模组</strong></td><td>江波龙</td><td>301308.SZ</td><td>SSD/UFS/eMMC</td><td>消费+企业级模组</td></tr>
-        <tr><td><strong>存储模组</strong></td><td>佰维存储</td><td>688525.SH</td><td>嵌入式存储/SSD</td><td>手机/PC OEM</td></tr>
-        <tr><td><strong>SSD 控制器</strong></td><td>联芸科技</td><td>688695.SH</td><td>PCIe 4.0/5.0 控制器</td><td>消费级 SSD 控制器出货领先</td></tr>
-        <tr><td><strong>企业存储</strong></td><td>浪潮信息</td><td>000977.SZ</td><td>服务器+存储</td><td>中国最大 AI 服务器厂商</td></tr>
-        <tr><td><strong>企业存储</strong></td><td>华为</td><td>未上市</td><td>OceanStor 全系列</td><td>全球 #2，份额 12%</td></tr>
-      </tbody>
-    </table>
+<!-- Chart 3: Segment Sizing Over Time -->
+<section>
+  <div class="container">
+    <h2>3. Segment Market Sizing: Year-by-Year Forecast</h2>
+    <p class="section-desc">Detailed annual projections across five core storage segments. Cloud Storage overtakes Enterprise Storage as the largest segment by 2028.</p>
+    <div class="chart-grid">
+      <div class="chart-card full">
+        <h3>Storage Segment Revenue Projection ($B), 2025–2030</h3>
+        <canvas id="segmentChart"></canvas>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ====== 5. 政策与地缘 ====== -->
-<section class="section" id="policy">
-  <h2>5. 政策与地缘政治</h2>
-
-  <h3>5.1 美国对华出口管制演进</h3>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th>时间</th><th>措施</th><th>对存储行业的影响</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>2022.10</td><td>BIS 10/7 规则</td><td>限制 18nm 以下 DRAM、128 层以上 NAND 设备</td></tr>
-        <tr><td>2023.10</td><td>规则升级</td><td>进一步收紧光刻/刻蚀/沉积设备范围</td></tr>
-        <tr><td>2024-2025</td><td>多轮实体清单更新</td><td>YMTC/CXMT 持续受限，EUV 完全断绝</td></tr>
-        <tr class="highlight-row"><td>2026E</td><td>预期进一步升级</td><td>可能限制 HBM 及相关封装设备对华出口</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="callout warn">
-    <strong>对 YMTC：</strong>设备获取受限，但已囤积一定量设备，三期项目仍可推进。先进节点（200+ 层以上）节奏可能放缓。<br>
-    <strong>对 CXMT：</strong>无法获取 EUV，但 19nm/17nm DUV 路线仍可推进。DDR5 量产证明了生存能力。
-  </div>
-
-  <h3>5.2 中国产业政策支持</h3>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th>政策/基金</th><th>规模</th><th>重点方向</th></tr>
-      </thead>
-      <tbody>
-        <tr class="highlight-row"><td><strong>国家大基金三期 (2024)</strong></td><td>¥3,440 亿 (~$470 亿)</td><td>设备/材料/先进存储</td></tr>
-        <tr><td>国家大基金二期 (2019)</td><td>¥2,042 亿</td><td>设备/材料/存储</td></tr>
-        <tr><td>国家大基金一期 (2014)</td><td>¥1,387 亿</td><td>芯片制造/设计/封测</td></tr>
-        <tr><td>半导体增值税减免</td><td>—</td><td>28nm 以下 10 年免税</td></tr>
-        <tr><td>信创工程</td><td>—</td><td>党政/央企 IT 国产化</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>5.3 全球主要经济体应对</h3>
-  <ul class="styled">
-    <li><strong>韩国：</strong>三星/海力士享受美国 VEU 待遇，在华工厂可继续运营，但先进节点设备仍需审批。</li>
-    <li><strong>日本：</strong>铠侠+WDC 合资工厂受益于 ¥3,000 亿+补贴，Rapidus 布局先进逻辑。</li>
-    <li><strong>欧盟：</strong>芯片法案投入 €430 亿，但存储领域投入有限。</li>
-  </ul>
-</section>
-
-<!-- ====== 6. 需求驱动 ====== -->
-<section class="section" id="applications">
-  <h2>6. 核心应用与需求驱动力</h2>
-
-  <h3>6.1 AI 与高性能计算（最大增量）</h3>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th>应用场景</th><th>存储需求</th><th>增长态势</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>大模型训练</strong></td><td>HBM3E/4 + 全闪存存储</td><td style="color:var(--green);font-weight:600">爆发式增长</td></tr>
-        <tr><td><strong>推理服务</strong></td><td>高带宽 DRAM + NVMe SSD 缓存</td><td style="color:var(--green)">快速增长</td></tr>
-        <tr><td><strong>向量数据库</strong></td><td>大容量 DRAM + NVMe SSD</td><td style="color:var(--accent3)">新兴场景</td></tr>
-        <tr><td><strong>AI Agent</strong></td><td>端侧 DRAM（12-16GB+）+ UFS 4.0</td><td style="color:var(--amber)">端侧爆发前夕</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p>Nvidia 消耗全球 ~70% HBM 供给，Rubin 平台 2026E 出货 2.5-2.7M 台，每台 >288GB HBM4，对应 ~7.2PB+ HBM 总需求。</p>
-
-  <h3>6.2 云数据中心</h3>
-  <ul>
-    <li>Hyperscaler 2026 Capex 预计 $3,000 亿+</li>
-    <li>全闪存存储 +17.6% YoY，AI 数据湖驱动容量指数级增长</li>
-    <li>中国 "东数西算" 工程推动西部数据中心建设</li>
-  </ul>
-
-  <h3>6.3 消费电子</h3>
-  <ul>
-    <li><strong>AI PC：</strong>2026E 渗透率突破 40%，DRAM 标配 16-32GB</li>
-    <li><strong>AI 手机：</strong>旗舰机 DRAM 升级至 12-16GB LPDDR5X</li>
-    <li><strong>游戏/VR：</strong>PS6 / Switch 2 推动定制存储需求</li>
-  </ul>
-
-  <h3>6.4 汽车与工业</h3>
-  <ul>
-    <li>智能座舱 DRAM 从 4-8GB → 16-32GB</li>
-    <li>自动驾驶 L3+ 传感器记录 → 大容量 SSD/UFS（512GB-1TB+）</li>
-    <li>车规级存储门槛高、利润好（北京君正 ISSI 核心阵地）</li>
-  </ul>
-</section>
-
-<!-- ====== 7. 估值表 ====== -->
-<section class="section" id="comps">
-  <h2>7. 可比公司估值表</h2>
-  <p style="font-size:13px;color:var(--text-dim);">数据截至 2026 年 5 月中旬，汇率按 1 USD ≈ 7.2 RMB、1 USD ≈ 1,380 KRW。</p>
-
-  <h3>7.1 全球存储巨头</h3>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th>公司</th><th>代码</th><th>市值 (USD Bn)</th><th>P/E (TTM)</th><th>EV/EBITDA</th><th>净利率</th><th>定位</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>三星电子</strong></td><td>005930.KS</td><td>~$1,300</td><td>22.4x</td><td>11.7x</td><td>21.5%</td><td>DRAM#1+NAND#1</td></tr>
-        <tr><td><strong>SK 海力士</strong></td><td>000660.KS</td><td>~$873</td><td>35.2x</td><td>—</td><td>—</td><td>HBM 之王</td></tr>
-        <tr><td><strong>美光</strong></td><td>MU</td><td>~$813</td><td>34.1x</td><td>22.1x</td><td>—</td><td>DRAM#3+NAND#4</td></tr>
-        <tr><td><strong>西部数据</strong></td><td>WDC</td><td>~$158</td><td>25.1x</td><td>—</td><td>—</td><td>HDD+NAND</td></tr>
-        <tr><td><strong>希捷</strong></td><td>STX</td><td>—</td><td>72.2x</td><td>—</td><td>—</td><td>HDD 技术领导者</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>7.2 中国存储产业链（A 股）</h3>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th>公司</th><th>代码</th><th>FY2025 收入 (RMB Bn)</th><th>FY2025 净利 (RMB Bn)</th><th>毛利率</th><th>定位</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>澜起科技</strong></td><td>688008</td><td>54.6</td><td>22.4</td><td style="color:var(--green);font-weight:600">62.2%</td><td>DDR5 内存接口</td></tr>
-        <tr><td><strong>兆易创新</strong></td><td>603986</td><td>92.0</td><td>16.5</td><td>40.2%</td><td>NOR Flash + 利基 DRAM</td></tr>
-        <tr><td><strong>北京君正</strong></td><td>300223</td><td>47.4</td><td>3.75</td><td>34.1%</td><td>车规存储 ISSI</td></tr>
-        <tr><td><strong>江波龙</strong></td><td>301308</td><td>—</td><td>—</td><td>—</td><td>存储模组龙头</td></tr>
-        <tr><td><strong>佰维存储</strong></td><td>688525</td><td>—</td><td>—</td><td>—</td><td>嵌入式存储/SSD</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>7.3 关键估值观察</h3>
-  <ol>
-    <li><strong>估值分化明显：</strong>三星 22.4x P/E / 11.7x EV/EBITDA 显著低于 SK 海力士 35.2x 和美光 34.1x，市场给予 HBM 领导者更高溢价。</li>
-    <li><strong>美光 EV/EBITDA 22.1x：</strong>接近历史周期顶部，2026 AI 驱动盈利增长已被充分定价。Forward P/E 仅 7.8x 意味着市场预期盈利翻 4 倍以上。</li>
-    <li><strong>希捷 72.2x P/E：</strong>盈利处于周期低谷，市场押注 HAMR 带来的盈利拐点。</li>
-    <li><strong>A 股标的：</strong>澜起科技 GPM 62.2% 为核心壁垒（DDR5 RCD 全球仅 2-3 家供应商），兆易创新和北京君正国产替代弹性更大。</li>
-  </ol>
-</section>
-
-<!-- ====== 8. 投资思路 ====== -->
-<section class="section" id="ideas">
-  <h2>8. 投资思路短名单</h2>
-
-  <h3>8.1 全球角度</h3>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th style="width:28px">#</th><th>标的</th><th>核心逻辑</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>1</strong></td><td><strong>SK 海力士</strong></td><td>HBM 结构性短缺最大受益者，台积电深度绑定 + 50-60% 份额构筑铁幕。</td></tr>
-        <tr><td><strong>2</strong></td><td><strong>三星电子</strong></td><td>估值折价明显（22.4x vs. 同行 34x+），HBM3E 若通过 Nvidia 认证将迎来估值重估。</td></tr>
-        <tr><td><strong>3</strong></td><td><strong>美光</strong></td><td>Forward P/E 7.8x，市场预期 2026 盈利翻 4 倍以上——一旦兑现弹性巨大。</td></tr>
-        <tr><td><strong>4</strong></td><td><strong>Western Digital</strong></td><td>闪存拆分催化剂：独立 NAND 有望获更高估值（25.1x → 30x+）。</td></tr>
-        <tr><td><strong>5</strong></td><td><strong>澜起科技</strong></td><td>DDR5 渗透 50%→70%+ + CXL MXC 第二增长曲线，GPM 62% 深厚护城河。</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>8.2 中国国产替代角度</h3>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th style="width:28px">#</th><th>标的</th><th>核心逻辑</th></tr>
-      </thead>
-      <tbody>
-        <tr class="highlight-row"><td><strong>1</strong></td><td><strong>YMTC 长江存储</strong></td><td>三期扩产 + 15% 全球份额目标，若实现将是全球 NAND 格局的最大变量。</td></tr>
-        <tr class="highlight-row"><td><strong>2</strong></td><td><strong>CXMT 长鑫存储</strong></td><td>国内唯一 DRAM IDM，DDR5 量产已越过 "生死线"，4.7% 只是起点。</td></tr>
-        <tr><td><strong>3</strong></td><td><strong>澜起科技</strong></td><td>DDR5 + CXL 双赛道，AI 服务器推动高带宽内存互联需求爆发。</td></tr>
-        <tr><td><strong>4</strong></td><td><strong>兆易创新</strong></td><td>NOR Flash + 利基 DRAM 双驱动，Q1 2026 收入 +119% YoY。</td></tr>
-        <tr><td><strong>5</strong></td><td><strong>江波龙</strong></td><td>消费模组→企业级 SSD 升级，YMTC NAND 成本优势 + 国产替代红利。</td></tr>
-      </tbody>
-    </table>
+<!-- Chart 4: 2025 vs 2030 Segment Share -->
+<section>
+  <div class="container">
+    <h2>4. Segment Share Evolution: 2025 → 2030</h2>
+    <p class="section-desc">Visual comparison of how the market composition shifts over five years. Cloud's share expands from ~31% to ~39%, while HDD contracts.</p>
+    <div class="chart-grid">
+      <div class="chart-card">
+        <h3>2025 Segment Share (by Revenue)</h3>
+        <canvas id="pie2025"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>2030E Segment Share (by Revenue)</h3>
+        <canvas id="pie2030"></canvas>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ====== 9. 展望与风险 ====== -->
-<section class="section" id="outlook">
-  <h2>9. 前景展望与风险提示</h2>
-
-  <h3>9.1 核心展望（2026-2028）</h3>
-  <ol>
-    <li><strong>HBM 供给持续紧张至 2027 年：</strong>Nvidia Rubin + AMD MI400 + 自研 ASIC 三重需求叠加。</li>
-    <li><strong>NAND "超级周期" 下半场：</strong>减产 + AI 数据湖 + QLC 普及 → ASP 温和上涨。</li>
-    <li><strong>中国存储 "从 1 到 10"：</strong>YMTC 三期 + CXMT DDR5 放量推动国产份额 5%→15%（2027E）。</li>
-    <li><strong>存储原厂利润率创历史新高：</strong>寡头 + 供给约束 + AI 溢价。</li>
-    <li><strong>HDD 长期衰退但中期稳定：</strong>HAMR 延长寿命，但 SSD $/TB 成本持续下行。</li>
-  </ol>
-
-  <h3>9.2 风险因素</h3>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th>风险类别</th><th>具体风险</th><th>影响</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>周期风险</strong></td><td>AI 投资过热后需求回调，存储再次供过于求</td><td><span style="color:var(--red);font-weight:600">⬆️ 高</span></td></tr>
-        <tr><td><strong>地缘风险</strong></td><td>美国对华设备/技术管制进一步升级</td><td><span style="color:var(--red);font-weight:600">⬆️ 高</span></td></tr>
-        <tr><td><strong>技术风险</strong></td><td>HBM4 良率爬坡不及预期</td><td><span style="color:var(--amber);font-weight:600">⬆️ 中</span></td></tr>
-        <tr><td><strong>竞争风险</strong></td><td>YMTC/CXMT 大规模扩产打破寡头平衡</td><td><span style="color:var(--amber);font-weight:600">⬆️ 中</span></td></tr>
-        <tr><td><strong>替代风险</strong></td><td>CXL/存算一体颠覆传统存储范式</td><td><span style="color:var(--text-dim)">⬇️ 低-中</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>9.3 需要持续跟踪的关键变量</h3>
-  <ul class="styled">
-    <li>Nvidia Rubin 实际出货量 vs. 预期（2.5-2.7M）</li>
-    <li>HBM4 三星/海力士/美光的客户认证进度</li>
-    <li>YMTC 三期设备到位情况与美国制裁加码节奏</li>
-    <li>CXMT DDR5 产能爬坡和客户导入（服务器 OEM 认证）</li>
-    <li>存储原厂 Capex 指引（反映对未来供需的判断）</li>
-    <li>中国大基金三期对存储领域的实际注资金额和节奏</li>
-  </ul>
-</section>
-
-<!-- ====== 附录 ====== -->
-<section class="section">
-  <h2>附录：数据来源与参考文献</h2>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th style="width:30px">#</th><th>来源</th><th>报告/文章</th><th>日期</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td>Yole Group</td><td>Memory Market Surges Beyond Expectations</td><td>2025.06</td></tr>
-        <tr><td>2</td><td>TrendForce</td><td>NAND Flash Revenue Rankings Q2 2025</td><td>2025.08</td></tr>
-        <tr><td>3</td><td>Omdia</td><td>DRAM Market Share Q4 2025</td><td>2026.02</td></tr>
-        <tr><td>4</td><td>Isaiah Research</td><td>AI Chipflation: 2026 HBM Market Forecast</td><td>2026.04</td></tr>
-        <tr><td>5</td><td>IDC</td><td>WW Enterprise Storage Systems Tracker Q3 2025</td><td>2025.12</td></tr>
-        <tr><td>6</td><td>Counterpoint</td><td>Global NAND Memory Market Share</td><td>2026.03</td></tr>
-        <tr><td>7</td><td>CFM 闪存市场</td><td>2025-2026 全球存储市场趋势白皮书</td><td>2026.04</td></tr>
-        <tr><td>8</td><td>Precedence Research</td><td>High-Bandwidth Memory Market</td><td>2026.04</td></tr>
-        <tr><td>9</td><td>StockAnalysis</td><td>Valuation Data</td><td>2026.05</td></tr>
-        <tr><td>10</td><td>雪球/东方财富</td><td>A 股存储公司年报 + Q1 数据</td><td>2026.04-05</td></tr>
-        <tr><td>11</td><td>电子工程专辑</td><td>YMTC/CXMT 扩产进展</td><td>2026.01-02</td></tr>
-      </tbody>
-    </table>
+<!-- Data Table -->
+<section>
+  <div class="container">
+    <h2>5. Detailed Data Table</h2>
+    <p class="section-desc">All projections in USD Billions. Note: Segments have partial overlap (e.g., Cloud Storage includes SSD/HDD hardware). Treat as indicative sizing, not additive.</p>
+    <div class="chart-card full">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Segment</th>
+            <th>2025</th><th>2026E</th><th>2027E</th><th>2028E</th><th>2029E</th><th>2030E</th>
+            <th>CAGR</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Total Market</strong></td>
+            <td><strong>$255.3</strong></td><td><strong>$291.2</strong></td><td><strong>$332.1</strong></td><td><strong>$378.8</strong></td><td><strong>$432.0</strong></td><td><strong>$483.9</strong></td>
+            <td class="up"><strong>14.1%</strong></td>
+          </tr>
+          <tr>
+            <td>Cloud Storage</td>
+            <td>$148.2</td><td>$175.2</td><td>$207.0</td><td>$244.6</td><td>$289.0</td><td>$341.5</td>
+            <td class="up">18.2%</td>
+          </tr>
+          <tr>
+            <td>Enterprise Storage</td>
+            <td>$157.3</td><td>$169.9</td><td>$183.5</td><td>$198.2</td><td>$214.1</td><td>$231.2</td>
+            <td class="up">8.0%</td>
+          </tr>
+          <tr>
+            <td>DRAM</td>
+            <td>$121.8</td><td>$130.6</td><td>$140.0</td><td>$150.1</td><td>$160.9</td><td>$172.5</td>
+            <td class="up">7.2%</td>
+          </tr>
+          <tr>
+            <td>SSD</td>
+            <td>$35.5</td><td>$41.0</td><td>$47.3</td><td>$54.6</td><td>$63.0</td><td>$72.7</td>
+            <td class="up">15.4%</td>
+          </tr>
+          <tr>
+            <td>HDD</td>
+            <td>$25.4</td><td>$26.5</td><td>$27.7</td><td>$28.9</td><td>$30.2</td><td>$31.5</td>
+            <td class="up">4.4%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
-<!-- ====== DISCLAIMER ====== -->
-<div class="disclaimer">
-  <strong>⚠️ 免责声明：</strong>以上内容由 AI 基于公开信息整理生成，仅供参考，<strong>不构成任何投资建议或个股推荐</strong>。存储行业具有显著周期性，估值和盈利可能在短期内大幅波动。投资有风险，决策需谨慎。
-</div>
+<!-- Key Insights -->
+<section>
+  <div class="container">
+    <h2>6. Key Takeaways</h2>
+    <p class="section-desc">Synthesized from Mordor Intelligence, Fortune Business Insights, Research & Markets, and GM Insights reports (2025).</p>
+    <div class="insights-grid">
+      <div class="insight-card accent2">
+        <h4>🚀 Cloud is the Engine</h4>
+        <p>At 18.2% CAGR, cloud storage will be a $342B market by 2030 — larger than the entire storage market was in 2024. AI/ML workloads and hyperscaler capex are the primary drivers.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>💾 SSD Cannibalization Accelerates</h4>
+        <p>SSD at 15.4% CAGR vs HDD at 4.4%. The crossover point where SSD revenue exceeds HDD by 2.3× happens by 2030 as NAND $/GB continues declining.</p>
+      </div>
+      <div class="insight-card purple">
+        <h4>🧠 DRAM: Steady but Strategic</h4>
+        <p>At $122B, DRAM is the largest "component" segment. HBM (High Bandwidth Memory) for AI accelerators is the growth hotspot within DRAM, with DDR5 adoption accelerating.</p>
+      </div>
+      <div class="insight-card orange">
+        <h4>🏢 Enterprise Storage Goes Hybrid</h4>
+        <p>On-prem enterprise storage grows at a modest 8% CAGR, but the real story is architectural: software-defined storage (SDS) and hyper-converged infrastructure now account for ~30% of deployments.</p>
+      </div>
+      <div class="insight-card blue">
+        <h4>🌏 Asia-Pacific Leads Growth</h4>
+        <p>APAC is the fastest-growing region, driven by China and India data center buildouts. North America remains the largest single market at ~42% share, but APAC's gap is closing rapidly.</p>
+      </div>
+      <div class="insight-card">
+        <h4>⚡ AI is the Wildcard</h4>
+        <p>Generative AI training and inference demand is creating a step-change in storage requirements — not just capacity, but low-latency, high-throughput architectures that benefit NVMe SSDs and HBM DRAM disproportionately.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-</main>
+<!-- Sources -->
+<section>
+  <div class="container">
+    <h2>Sources & Methodology</h2>
+    <p class="section-desc">
+      Data aggregated from publicly available research reports (2025). Year-by-year segment projections are interpolated from endpoint CAGR figures. Full reports behind paywalls; top-line figures verified across multiple independent sources.
+    </p>
+    <div class="chart-card">
+      <ul style="color: var(--text-secondary); font-size: 0.9rem; line-height: 2;">
+        <li>Mordor Intelligence — <em>Data Storage Market Size & Share Analysis</em> (2025)</li>
+        <li>Fortune Business Insights — <em>Data Storage Market Size, Share & Growth</em> (2025)</li>
+        <li>Research & Markets — <em>Solid State Drive Market Forecasts 2025–2030</em> (2025)</li>
+        <li>Fortune Business Insights — <em>DRAM Market Size & Share</em> (2025)</li>
+        <li>Research & Markets — <em>Cloud Storage Market Forecasts 2025–2030</em> (2025)</li>
+        <li>The Business Research Company — <em>Enterprise Storage Global Market Report</em> (2025)</li>
+        <li>RealTimeDataStats — <em>Hard Disk Drive Market Share & Trends</em> (2025)</li>
+        <li>GM Insights — <em>NAND Flash Market</em> (2025)</li>
+      </ul>
+      <p style="margin-top: 16px; color: var(--orange); font-size: 0.85rem;">
+        ⚠️ Disclaimer: This page is for informational purposes only and does not constitute investment advice. Segment figures are indicative — segments have partial overlap (e.g., Cloud Storage includes SSD/HDD hardware). Totals are not additive across segments. Data sourced from third-party research; verify independently before making investment decisions.
+      </p>
+    </div>
+  </div>
+</section>
 
-<footer class="footer">
-  全球计算机存储行业深度研究报告 · 2026 年 5 月 18 日 · AI-Generated Research
+<footer>
+  <div class="container">
+    <p>Generated May 2026 · Data: Mordor Intelligence, Fortune Business Insights, Research & Markets, and others</p>
+  </div>
 </footer>
 
-<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
 <script>
-  // Back to top button
-  const btn = document.getElementById('backTop');
-  window.addEventListener('scroll', () => {
-    btn.classList.toggle('visible', window.scrollY > 600);
-  });
+// Color palette
+const colors = {
+  total: '#6366f1',
+  cloud: '#22d3ee',
+  enterprise: '#a78bfa',
+  dram: '#60a5fa',
+  ssd: '#34d399',
+  hdd: '#f59e0b',
+};
 
-  // Mobile nav toggle
-  const tocToggle = document.createElement('button');
-  tocToggle.className = 'toc-toggle';
-  tocToggle.textContent = '📑 目录导航';
-  tocToggle.onclick = () => {
-    const nav = document.getElementById('navInner');
-    nav.classList.toggle('open');
-  };
-  document.querySelector('.nav-bar').prepend(tocToggle);
+// ============ Chart 1: Total Market Line ============
+const ctx1 = document.getElementById('totalMarketChart').getContext('2d');
+new Chart(ctx1, {
+  type: 'line',
+  data: {
+    labels: ['2025', '2026E', '2027E', '2028E', '2029E', '2030E'],
+    datasets: [{
+      label: 'Total Data Storage Market ($B)',
+      data: [255.3, 291.2, 332.1, 378.8, 432.0, 483.9],
+      borderColor: colors.total,
+      backgroundColor: 'rgba(99,102,241,0.1)',
+      borderWidth: 3,
+      fill: true,
+      tension: 0.4,
+      pointBackgroundColor: colors.total,
+      pointRadius: 6,
+      pointHoverRadius: 10,
+      pointBorderColor: '#0f1117',
+      pointBorderWidth: 2,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: { labels: { color: '#8b8fa3', font: { size: 13 } } },
+      tooltip: {
+        callbacks: {
+          label: ctx => `$${ctx.parsed.y.toFixed(1)} Billion`
+        }
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: false,
+        min: 200,
+        max: 520,
+        ticks: { color: '#8b8fa3', callback: v => '$' + v + 'B' },
+        grid: { color: 'rgba(255,255,255,0.05)' }
+      },
+      x: {
+        ticks: { color: '#8b8fa3' },
+        grid: { display: false }
+      }
+    }
+  }
+});
+
+// ============ Chart 2: CAGR Bar ============
+const ctx2 = document.getElementById('cagrChart').getContext('2d');
+new Chart(ctx2, {
+  type: 'bar',
+  data: {
+    labels: ['Cloud Storage', 'SSD', 'Total Market', 'Enterprise Storage', 'DRAM', 'HDD'],
+    datasets: [{
+      label: 'CAGR (%)',
+      data: [18.2, 15.4, 14.1, 8.0, 7.2, 4.4],
+      backgroundColor: [colors.cloud, colors.ssd, colors.total, colors.enterprise, colors.dram, colors.hdd],
+      borderRadius: 8,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => `${ctx.parsed.x.toFixed(1)}% CAGR`
+        }
+      }
+    },
+    scales: {
+      x: {
+        ticks: { color: '#8b8fa3', callback: v => v + '%' },
+        grid: { color: 'rgba(255,255,255,0.05)' }
+      },
+      y: {
+        ticks: { color: '#e2e4e9', font: { size: 13, weight: '600' } },
+        grid: { display: false }
+      }
+    }
+  }
+});
+
+// ============ Chart 3: Segment Multi-Line ============
+const ctx3 = document.getElementById('segmentChart').getContext('2d');
+const years = ['2025', '2026E', '2027E', '2028E', '2029E', '2030E'];
+const datasets = [
+  { label: 'Cloud Storage', data: [148.2, 175.2, 207.0, 244.6, 289.0, 341.5], color: colors.cloud },
+  { label: 'Enterprise Storage', data: [157.3, 169.9, 183.5, 198.2, 214.1, 231.2], color: colors.enterprise },
+  { label: 'DRAM', data: [121.8, 130.6, 140.0, 150.1, 160.9, 172.5], color: colors.dram },
+  { label: 'SSD', data: [35.5, 41.0, 47.3, 54.6, 63.0, 72.7], color: colors.ssd },
+  { label: 'HDD', data: [25.4, 26.5, 27.7, 28.9, 30.2, 31.5], color: colors.hdd },
+];
+
+new Chart(ctx3, {
+  type: 'line',
+  data: {
+    labels: years,
+    datasets: datasets.map(d => ({
+      label: d.label,
+      data: d.data,
+      borderColor: d.color,
+      backgroundColor: 'transparent',
+      borderWidth: 2.5,
+      tension: 0.4,
+      pointRadius: 4,
+      pointHoverRadius: 7,
+      pointBackgroundColor: d.color,
+    }))
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: { labels: { color: '#8b8fa3', font: { size: 12 }, usePointStyle: true, pointStyleWidth: 10 } },
+      tooltip: {
+        callbacks: {
+          label: ctx => `${ctx.dataset.label}: $${ctx.parsed.y.toFixed(1)}B`
+        }
+      }
+    },
+    scales: {
+      y: {
+        ticks: { color: '#8b8fa3', callback: v => '$' + v + 'B' },
+        grid: { color: 'rgba(255,255,255,0.05)' }
+      },
+      x: {
+        ticks: { color: '#8b8fa3' },
+        grid: { display: false }
+      }
+    }
+  }
+});
+
+// ============ Chart 4: Pie Charts ============
+const pieData2025 = {
+  labels: ['Cloud Storage', 'Enterprise Storage', 'DRAM', 'SSD', 'HDD'],
+  datasets: [{
+    data: [148.2, 157.3, 121.8, 35.5, 25.4],
+    backgroundColor: [colors.cloud, colors.enterprise, colors.dram, colors.ssd, colors.hdd],
+    borderColor: '#0f1117',
+    borderWidth: 2,
+  }]
+};
+
+const pieData2030 = {
+  labels: ['Cloud Storage', 'Enterprise Storage', 'DRAM', 'SSD', 'HDD'],
+  datasets: [{
+    data: [341.5, 231.2, 172.5, 72.7, 31.5],
+    backgroundColor: [colors.cloud, colors.enterprise, colors.dram, colors.ssd, colors.hdd],
+    borderColor: '#0f1117',
+    borderWidth: 2,
+  }]
+};
+
+const pieOptions = {
+  responsive: true,
+  maintainAspectRatio: true,
+  plugins: {
+    legend: {
+      position: 'bottom',
+      labels: { color: '#8b8fa3', font: { size: 11 }, padding: 16, usePointStyle: true }
+    },
+    tooltip: {
+      callbacks: {
+        label: ctx => {
+          const total = ctx.dataset.data.reduce((a,b) => a+b, 0);
+          const pct = ((ctx.parsed / total) * 100).toFixed(1);
+          return `${ctx.label}: $${ctx.parsed.toFixed(1)}B (${pct}%)`;
+        }
+      }
+    }
+  }
+};
+
+new Chart(document.getElementById('pie2025'), { type: 'doughnut', data: pieData2025, options: pieOptions });
+new Chart(document.getElementById('pie2030'), { type: 'doughnut', data: pieData2030, options: pieOptions });
 </script>
-
 </body>
 </html>
